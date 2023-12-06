@@ -4,22 +4,23 @@ import os
 
 
 class SistemaEstudo:
-
   def __init__(self, banco_de_questoes):
     self.banco_de_questoes = banco_de_questoes
     self.questoes_selecionadas = []
-
   def selecionar_questoes(self, quantidade):
     if quantidade <= len(self.banco_de_questoes):
-      self.questoes_selecionadas = random.sample(self.banco_de_questoes,
-                                                 quantidade)
+      random.shuffle(self.banco_de_questoes)
+      self.questoes_selecionadas = self.banco_de_questoes[:quantidade]
     else:
       print("Quantidade solicitada maior que o banco de questões.")
 
   def estudar(self):
     corretas = 0
     incorretas = 0
+    n_pergunta = 0
     for questao in self.questoes_selecionadas:
+      n_pergunta += 1
+      print(f"Questão {n_pergunta}")
       print(f"Pergunta: {questao['pergunta']}")
       for i, alternativa in enumerate(questao['alternativas'], 1):
         print(f"{i}. {alternativa}")
